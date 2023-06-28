@@ -10,3 +10,5 @@ Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_ICSS/stimulati
 *.pdf
 Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_choiceTask/stimulation-N-subjects.csv
 Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_choiceTask/inhibition-N-subjects.csv
+*.txt
+*.csv

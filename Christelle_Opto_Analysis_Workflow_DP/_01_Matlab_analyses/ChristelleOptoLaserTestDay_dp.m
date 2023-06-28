@@ -25,6 +25,10 @@ set_gramm_plot_defaults();
 [~,~,ratinfo]= xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\Christelle Opto Summary Record_dp.xlsx");
 
 
+%load the original behavior data sheet used by Christelle
+% (used to confirm laser duration)
+[~,~,DataOG] = xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\OptoStimDayAnalysis051121.xlsx");
+
 VarNames = raw(1,:);
 Data = raw(2: end,:);
 
@@ -131,8 +135,8 @@ Data= Data(2:end,:);
 % 
 % datesNew= unique([data.StartDate{:}]);
 
-%load the original sheet used by Christelle
-[~,~,DataOG] = xlsread("OptoStimDayAnalysis051121.xlsx");
+% %load the original sheet used by Christelle
+% [~,~,DataOG] = xlsread("OptoStimDayAnalysis051121.xlsx");
 
 DataOG= cell2table(DataOG);
 
@@ -281,8 +285,7 @@ Data(ind, "StimLength")= table(nan);
 %% -- Use Christelle's spreadsheet to find StimLength for sessions
 % - StimLength seems manually added by Christelle per session in .xlsx
 % 
-% TODO: I think incorrect subjects are in some of the MPC files (e.g. 200123). So my sheet is apparently wrong. Should use
-% another variable to match up correctly...fixed manually for now tho
+% TODO: Should use another variable to match up correctly...fixed manually for now tho
 % 
 % initialize StimLength field
 % Data{:,"StimLength"}= {nan};%cell(size(Data,1));

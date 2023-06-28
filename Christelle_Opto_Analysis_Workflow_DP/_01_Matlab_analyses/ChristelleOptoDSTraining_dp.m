@@ -17,8 +17,17 @@ criteriaDiscrimIndex= 1.5; %respond to DS 30% more than NS
 
 % %--christelle opto data
 
+%2023-06-28 reextracted data sheet row profile was missing ToneDur column, so fails
+    %Prior code used the old "MasterOptoDSTrainingData" sheet so that
+    %should work but data is outdated.
+    
+    % ToneDur is still in sheet, unlabeled as A(2) 
+    % Should be able to use MSN info to determine ToneDur based on stage
+    % Also, ToneDur is still in this sheet "F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\VP-Opto_allSessions_FullExtract_Corrected.xlsx"
+    % unlabeled as A(2)
+
 %import behavioral data; dp reextracted data from data repo
-[~,~,raw] = xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\_dp_reextracted\dp_reextracted_DS_sessions_and_Opto_sessions.xlsx")
+[~,~,raw] = xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\_dp_reextracted\dp_reextracted_DS_sessions_and_Opto_sessions.xlsx");
 
 %import subject metadata; update metadata sheet from data repo
 [~,~,ratinfo]= xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\Christelle Opto Summary Record_dp.xlsx");
@@ -113,6 +122,8 @@ end
 % if duration == 10 and numtrials == 60 ==> stage 5 (ps. DS + NS == 60)
 % if duration = anything else ==> stage NaN, print rat and date in which this occurs
 
+
+% 2023-06-28 - You will get an error with reextracted data sheet. see note above where data is loaded. need to recover ToneDur
 for i=1:length(TrainingData.ToneDur)% changed for christelle, are there trials/stages excluded because stages sometimes start at 3?
     if TrainingData.ToneDur{i} >= 60
         TrainingData.Stage(i,:) = 1;
