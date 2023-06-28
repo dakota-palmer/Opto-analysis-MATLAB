@@ -7,153 +7,23 @@ clc
 %--- Set output folder and format for figures to be saved
 figPath= strcat(pwd,'\_output\_ICSS\');
 
-figFormats= {'.svg'} %list of formats to save figures as (for saveFig.m)
+% figFormats= {'.png'} %list of formats to save figures as (for saveFig.m)
+figFormats= {'.svg','.pdf'} %list of formats to save figures as (for saveFig.m)
 
 %% Set GRAMM defaults for plots
 
 set_gramm_plot_defaults();
 
-% 
-% %--- Set some "Main"/"Default" settings for GRAMM plots
-% % Saving at once in single vars so dont have to always use
-% % so much code when constructing individual plots
-% 
-% % altering things like color and text size in matlab can save a ton of time manually changing in external program like illustrator 
-% 
-% % -text options
-% %Need to store mixed data types (str for argument/variable names and some num for values), so store as
-% %a cell array. 
-% 
-% % When you want to call on the gramm object to set_text_options, retrieve values with {:} like so:
-%     % g.set_text_options(text_options_MainStyle{:}); 
-% 
-% text_options_DefaultStyle= {'font'; 'Arial'; 
-%     'interpreter'; 'none'; 
-%     'base_size'; 22; 
-%     'label_scaling'; 1;
-%    'legend_scaling'; 1; 
-%    'legend_title_scaling'; 1.1;
-%    'facet_scaling'; 1.2; 
-%    'title_scaling'; 1.4;
-%    'big_title_scaling'; 1.4};
-% 
-% %-- Default plot linestyles 
-% %To be used to set the 'base_size' of lines e.g. like:
-% %     d().set_line_options('base_size',linewidthSubj);
-% 
-% %may consider using the group argument in gramm as a logic gate for these (e.g. if group= subject, use subject settings, if group=[] use grand settings)
-% 
-% %thin, light lines for individual subj
-% linewidthSubj= 0.5;
-% lightnessRangeSubj= [100,100]; %lightness facet with lightness range doesn't work with custom colormap color facet? Issue is I think unknown/too many lightness 'categories' gramm wants to make but can't do it well for custom colors. would be nice if could use alpha but dont think this works... better to have distinct color
-% 
-% 
-% %dark, thick lines for between subj grand mean
-% linewidthGrand= 1.5;
-% lightnessRangeGrand= [10,10]; %lightness facet with lightness range doesn't work with custom colormap color facet? Issue is I think unknown/too many lightness 'categories' gramm wants to make but can't do it well for custom colors. would be nice if could use alpha but dont think this works... better to have distinct color
-% 
-% 
-% %--COLOR MAPS and notes about faceting Color & Lightness
-%  %- 2 strategies for plotting individual subject observations 'lighter' with darker
-%  % grand means:
-%  
-%  % 1) Use built in colormaps (ultimately not good in long run if you want to change colors). Using same map for individuals & mean plots but facet 'lightness' = subject.
-%  % This works well with built in gramm colormaps I think bc they can generate a lot of lightness categories (e.g. many subjects)
-%  
-%  % 2)*recommended* Use custom different map for individuals and mean plots without faceting
-%  % lightness. This way you have total control over the colors without
-%  % relying on gramm to figure out lightness categories. All you have to do
-%  % is define color map to use for each group 
-% 
-% %-- Default plot colormaps
-% 
-% %-brewer2 and brewerDark are two cmaps that are built-in and are good for
-% %plotting subjects, means respectively (different shades of same colors)
-% %if only 2 groupings being plotted, brewer2 and brewer_dark work well 
-% paletteSubj= 'brewer2';
-% paletteGrand= 'brewer_dark';
-% 
-% 
-% %-- Also have made some custom maps, examples follow (made using colorbrewer2.org)
-% % all you need is to make the map you want on the site, copy the RGB values
-% % and divide by 255 for matlab to recognize them as a colormap 
-% 
-% %--- Custom colormap examples for plots
-% 
-% % - Custom colormap updated from below. want alternating distinct hues for auto faceting
-% % will make different maps with diff lightness for diff 'groups' (e.g. subject lighter vs darker grand means) 
-% 
-% % alternatively add lighness facet for subjects? with fixed lightness range
-% % of single value should be able to export to illustrator and select same
-% % stroke
-% 
-% 
-% % - Examples: Colormap for 465nm vs 405nm comparisons (7 class PRGn, purple vs green)
-% %green and purple %3 levels each, dark to light extremes + neutral middle
-% mapCustomFP= [ 27,120,55;
-%             127,191,123;
-%             217,240,211;
-%             247,247,247
-%             231,212,232
-%             175,141,195;
-%             118,42,131;
-%            ];
-% 
-%         mapCustomFP= mapCustomFP/255;
-%         
-%         %viz this colormap in colorbar to side of rgbplot
-%         rgbplot(mapCustomFP);
-%         hold on
-%         colormap(mapCustomFP)
-%         colorbar('Ticks',[])
-%         title('mapCustomFP');
-% 
-% % - Colormap for DS vs NS comparisons (7 class BrBG; teal blue vs. brown orange)
-% mapCustomCue= [90,180,172;
-%             199,234,229;
-%             245,245,245;
-%             1,102,94
-%             246,232,195;
-%             216,179,101;
-%             140,81,10;   
-%             ];
-%             
-%         mapCustomCue= mapCustomCue/255;
-% 
-%                 %viz this colormap in colorbar to side of rgbplot
-%         rgbplot(mapCustomCue);
-%         hold on
-%         colormap(mapCustomCue)
-%         colorbar('Ticks',[])
-%         title('mapCustomCue');
-% 
-%         %if you want to specific colors from this map, remember each color is= RGB values so each row is 1 color and you can just index single row.
-%         %alternatively for auto faceting you may need to reorganize the
-%         %cmap order such that the colors alternate between hues (e.g. since
-%         %gramm() will facet in order of the colors in the cmap)
+%% load data- update paths accordingly
 
-%% load data
-%CurrentDir ='/Volumes/nsci_richard/Christelle/Codes/Matlab';
-%SavingDir = '/Volumes/nsci_richard/Christelle/Codes/Matlab';
-%cd(CurrentDir)
-
-
-% %--christelle opto data
-% CurrentDir = 'C:\Users\Dakota\Desktop\_christelle_opto_copy';
-CurrentDir = 'C:\Users\Dakota\Desktop\_dp_christelle_opto_workingDir';
-cd(CurrentDir)
-
-
-% [~,~,raw] = xlsread('Opto ICSS Data');
-
-%dp reextracted data
+%import behavioral data; dp reextracted data from data repo
 [~,~,raw]= xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\_dp_reextracted\dp_reextracted_ICSS.xlsx");
 
-% [~,~,ratinfo] = xlsread('Christelle Opto Summary Record.xlsx');
-[~,~,ratinfo] = xlsread('Christelle Opto Summary Record_dp.xlsx');
-
+%import subject metadata; update metadata sheet from data repo
+[~,~,ratinfo]= xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\Christelle Opto Summary Record_dp.xlsx");
 
 VarNames = raw(1,:);
+
 Data = raw(2: end,:);
 
 ICSS = struct();
@@ -581,7 +451,7 @@ ICSStable(ind, "trainPhase")= {'ICSS-Reversed-active-side'};
 % 
 % ICSStable(ind, "trainDayThisPhase")= table(ICSStable.Session(ind)-5); %carrying over ind of later phase, subtract n first phase sessions from this
 
-% use findgruops for more robust counting (not assuming n sessions per
+% use findgroups for more robust counting (not assuming n sessions per
 % phase since we know group 2 didn't follow assumption)
 %initialize new col
 data= ICSStable;
@@ -1007,10 +877,6 @@ d.draw();
 
 saveFig(gcf, figPath,figTitle,figFormats);
 
-
-%% === ---------------------DP Figure 6 2022-10-17 ----------
-
-% do figure 5 first. use that as template
 
 %% ----Stat comparison of ICSS active v inactive nosepokes
 

@@ -5,31 +5,18 @@ clc
 figPath= strcat(pwd,'\_output\_choiceTask\');
 
 % figFormats= {'.png'} %list of formats to save figures as (for saveFig.m)
-figFormats= {'.svg'} %list of formats to save figures as (for saveFig.m)
-
+figFormats= {'.svg','.pdf'} %list of formats to save figures as (for saveFig.m)
 
 set_gramm_plot_defaults;
 
 
-%% load data
-%CurrentDir ='/Volumes/nsci_richard/Christelle/Codes/Matlab';
-%SavingDir = '/Volumes/nsci_richard/Christelle/Codes/Matlab';
-%cd(CurrentDir)
+%% load data- update paths accordingly
 
-
-% %--christelle opto data
-% CurrentDir = 'C:\Users\Dakota\Desktop\_christelle_opto_copy';
-CurrentDir = 'C:\Users\Dakota\Desktop\_dp_christelle_opto_workingDir';
-cd(CurrentDir)
-
-
-% [~,~,raw] = xlsread('OptoLeverChoiceData');
-
-%dp reextracted data
+%import behavioral data; dp reextracted data from data repo
 [~,~,raw] = xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\_dp_reextracted\dp_reextracted_LeverChoiceTask.xlsx"); %dp reextracted data
 
-% [~,~,ratinfo] = xlsread('Christelle Opto Summary Record.xlsx');
-[~,~,ratinfo] = xlsread('Christelle Opto Summary Record_dp.xlsx');
+%import subject metadata; update metadata sheet from data repo
+[~,~,ratinfo]= xlsread("F:\_Github\Richard Lab\data-vp-opto\_Excel_Sheets\Christelle Opto Summary Record_dp.xlsx");
 
 VarNames = raw(1,:);
 
@@ -194,8 +181,8 @@ LeverChoice.InactiveLicks=cell2mat(LeverChoice.InactiveLicks)
 %     end
 % end 
 
-% %todo: 
-% % 2022-12-01 new exclusion method & criteria
+% -- new exclusion method & criteria--
+% %-- 2022-12-01 
 % % simply calculate for all sessions then exclude data post-hoc accordingly
 % % based on trainPhase
 % % Just calculate values here, exclude data after reformatting into table

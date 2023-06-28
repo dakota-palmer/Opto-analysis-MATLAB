@@ -1,0 +1,12 @@
+
+*.svg
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_choiceTask/inhibition-N-subjectsb.csv
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_choiceTask/stimulation-N-subjectsb.csv
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_DS_task_stimDay/inhibition-N-subjects.csv
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_DS_task_stimDay/stimulation-N-subjects.csv
+*.mat
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_ICSS/stimulation-N-subjectsb.csv
+*.asv
+*.pdf
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_choiceTask/stimulation-N-subjects.csv
+Christelle_Opto_Analysis_Workflow_DP/_01_Matlab_analyses/_output/_choiceTask/inhibition-N-subjects.csv
