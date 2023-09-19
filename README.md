@@ -11,7 +11,10 @@ Fiber photometry analysis pipeline developed from Christelle Cayton's code for J
     * Lever choice task with reward-paired optogenetic manipulation sessions
     * Intracranial Self Stimulation (ICSS) sessions
 
+### Note about use/adapting:
 
-Christelle Opto Dataset 
+Specifically designed for use with Christelle Opto Dataset 
 
 Documentation- https://docs.google.com/document/d/1F94Xec-_-rlkjDg2zOuTywmcFhVd6r0DPPxrp7Jz_Ag/edit?usp=sharing
+
+  * Aimed to analyze data generated from MED Associates MPC2XL Row Profiles
